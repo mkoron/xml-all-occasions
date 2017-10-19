@@ -9,6 +9,10 @@ class WebsiteConstructor(dispatcher.Dispatcher, ContentHandler):
         self.directory = [directory]
         self.ensureDirectory()
 
+    def __enter__(self): pass
+
+    def __exit__(self): pass
+
     def ensureDirectory(self):
         path = os.path.join(*self.directory)
         if not os.path.isdir(path): os.makedirs(path)
