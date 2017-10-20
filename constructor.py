@@ -1,3 +1,6 @@
+"""
+Handles the parsing of a xml file and creates a full website based on the xml tags.
+"""
 from xml.sax.handler import ContentHandler
 import dispatcher
 import os
@@ -8,10 +11,6 @@ class WebsiteConstructor(dispatcher.Dispatcher, ContentHandler):
     def __init__(self, directory):
         self.directory = [directory]
         self.ensureDirectory()
-
-    def __enter__(self): pass
-
-    def __exit__(self): pass
 
     def ensureDirectory(self):
         path = os.path.join(*self.directory)
@@ -40,7 +39,10 @@ class WebsiteConstructor(dispatcher.Dispatcher, ContentHandler):
 
     def startPage(self, attrs):
         filename = os.path.join(*self.directory + [attrs['name'] + '.html'])
-        self.out = open(filename, 'w')
+        try:
+            self.out = open(filename, 'w')
+        except IOError:
+            print("There has been an error in writing the output files")
         self.writeHeader(attrs['title'])
         self.passthrough = True
 

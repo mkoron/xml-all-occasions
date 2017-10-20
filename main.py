@@ -9,10 +9,14 @@ Example:
         python main input_file.xml
 
 """
+import os.path
 from xml.sax import parse
 import sys
-import dispatcher
 import constructor
 
 if __name__ == '__main__':
-    parse(sys.argv[1], constructor.WebsiteConstructor('public_html'))
+    inputFile = sys.argv[1]
+    if os.path.isfile(inputFile):
+        parse(inputFile, constructor.WebsiteConstructor('public_html'))
+    else:
+        print("There has been an error reading the file.")

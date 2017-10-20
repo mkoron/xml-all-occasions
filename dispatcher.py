@@ -1,3 +1,8 @@
+"""
+Takes care of finding the appropriate handler, constructing 
+the argument tuple and then calling the handler with those
+arguments.
+"""
 class Dispatcher:
     def dispatch(self, prefix, name, attrs=None):
         mname = prefix + name.capitalize()
